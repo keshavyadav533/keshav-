@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 260 60% 5%;
+    --foreground: 0 0% 98%;
+
+    --card: 260 50% 8%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 260 50% 8%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 180 100% 50%;
+    --primary-foreground: 260 60% 5%;
+
+    --secondary: 260 40% 15%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 260 30% 18%;
+    --muted-foreground: 260 15% 60%;
+
+    --accent: 280 100% 65%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 260 30% 20%;
+    --input: 260 30% 20%;
+    --ring: 180 100% 50%;
+
+    --radius: 1rem;
+
+    /* Custom cosmic portfolio variables */
+    --gradient-cosmic: linear-gradient(135deg, hsl(260 60% 10%) 0%, hsl(280 60% 15%) 50%, hsl(260 50% 8%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(180 100% 50%) 0%, hsl(200 100% 60%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(280 100% 65%) 0%, hsl(320 100% 60%) 100%);
+    --gradient-text: linear-gradient(90deg, hsl(180 100% 50%) 0%, hsl(280 100% 70%) 50%, hsl(320 100% 60%) 100%);
+    --gradient-hero-bg: radial-gradient(ellipse 100% 100% at 50% 0%, hsl(280 80% 30% / 0.4) 0%, transparent 50%),
+                        radial-gradient(ellipse 80% 80% at 80% 50%, hsl(180 100% 50% / 0.15) 0%, transparent 40%),
+                        radial-gradient(ellipse 60% 60% at 10% 80%, hsl(280 100% 50% / 0.2) 0%, transparent 40%);
+    --glow-cyan: 0 0 60px hsl(180 100% 50% / 0.5), 0 0 120px hsl(180 100% 50% / 0.3);
+    --glow-purple: 0 0 60px hsl(280 100% 65% / 0.5), 0 0 120px hsl(280 100% 65% / 0.3);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+    background-image: var(--gradient-cosmic);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    @apply bg-primary/40 text-foreground;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-text);
+  }
+
+  .text-gradient-cyan {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+  }
+
+  .text-gradient-purple {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-accent);
+  }
+
+  .bg-gradient-cosmic {
+    background-image: var(--gradient-cosmic);
+  }
+
+  .bg-gradient-hero {
+    background-image: var(--gradient-hero-bg);
+  }
+
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+
+  .bg-gradient-accent {
+    background-image: var(--gradient-accent);
+  }
+
+  .glow-cyan {
+    box-shadow: var(--glow-cyan);
+  }
+
+  .glow-purple {
+    box-shadow: var(--glow-purple);
+  }
+
+  .glass {
+    @apply bg-card/40 backdrop-blur-xl border border-border/30;
+  }
+
+  .glass-strong {
+    @apply bg-card/60 backdrop-blur-2xl border border-border/50;
+  }
+
+  .glass-hover {
+    @apply transition-all duration-500 hover:bg-card/60 hover:border-primary/40 hover:shadow-lg;
+  }
+
+  .cosmic-border {
+    position: relative;
+  }
+
+  .cosmic-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: var(--gradient-text);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.5;
+    transition: opacity 0.3s;
+  }
+
+  .cosmic-border:hover::before {
+    opacity: 1;
+  }
+}
+
+/* Stars animation */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.star {
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(260 60% 5%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(280 100% 65% / 0.5);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(180 100% 50% / 0.7);
+}
